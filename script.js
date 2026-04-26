@@ -54,7 +54,7 @@
 // Reveal-on-scroll
 (function () {
   const targets = document.querySelectorAll(
-    '.section-header, .lore-card, .ticket, .step, .poster, .phase, .cta'
+    '.section-header, .lore-card, .ticket, .step, .poster, .cta'
   );
   targets.forEach((el) => el.classList.add('reveal'));
 
