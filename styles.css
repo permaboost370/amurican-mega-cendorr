@@ -470,6 +470,8 @@ a{color:inherit;text-decoration:none}
   opacity: .85;
 }
 .ca-note b{ color: var(--amc-gold) }
+.ca-note a{ color: var(--amc-gold); text-decoration: underline; text-underline-offset: 3px }
+.ca-note a:hover{ color: #fff }
 
 /* =========================================================
    LORE
