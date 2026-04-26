@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>$AMC — Amurican Mega Cendorr | MOVIEZ GO HIYOR!!!</title>
+<meta name="description" content="Amurican Mega Cendorr ($AMC) — the only memecoin where the stonk goes up 100% a week and short interest still stays low. MOVIEZ GO HIYOR!!!" />
+<link rel="icon" type="image/jpeg" href="logo.jpeg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Special+Elite&family=Bowlby+One+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- TICKER TAPE -->
+<div class="ticker-tape" aria-hidden="true">
+  <div class="ticker-track">
+    <span>$AMC +100% THIS WEEK</span><span>★</span>
+    <span>SHORT INTEREST: STILL SOMEHOW LOW</span><span>★</span>
+    <span>MOVIEZ GO HIYOR!!!</span><span>★</span>
+    <span>APES TOGETHER STRONG</span><span>★</span>
+    <span>NOW SHOWING: AMURICAN MEGA CENDORRRRRR</span><span>★</span>
+    <span>DIAMOND HANDS 💎🙌</span><span>★</span>
+    <span>$AMC +100% THIS WEEK</span><span>★</span>
+    <span>SHORT INTEREST: STILL SOMEHOW LOW</span><span>★</span>
+    <span>MOVIEZ GO HIYOR!!!</span><span>★</span>
+    <span>APES TOGETHER STRONG</span><span>★</span>
+    <span>NOW SHOWING: AMURICAN MEGA CENDORRRRRR</span><span>★</span>
+    <span>DIAMOND HANDS 💎🙌</span><span>★</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="nav">
+  <a class="brand" href="#top">
+    <img src="logo.jpeg" alt="$AMC logo" />
+    <div class="brand-text">
+      <span class="brand-ticker">$AMC</span>
+      <span class="brand-name">Amurican Mega Cendorr</span>
+    </div>
+  </a>
+  <nav class="nav-links">
+    <a href="#lore">Lore</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#buy">How 2 Buy</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#roadmap">Coming Attractions</a>
+  </nav>
+  <div class="nav-right">
+    <div class="nav-socials">
+      <a class="nav-social" href="#" target="_blank" rel="noopener" aria-label="Twitter / X" title="Twitter / X">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21l-6.52 7.45L22.5 22h-6.84l-4.36-5.69L6.3 22H3.54l6.97-7.96L1.5 2h6.99l3.94 5.21L18.244 2zm-1.2 18h1.65L7.04 4H5.27l11.77 16z"/></svg>
+      </a>
+      <a class="nav-social" href="#" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.022c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.566-4.458c.535-.196 1.006.128.832.938z"/></svg>
+      </a>
+      <a class="nav-social" href="#" target="_blank" rel="noopener" aria-label="DexScreener" title="DexScreener">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3 3h3v18H3zM8.5 11h3v10h-3zM14 7h3v14h-3zM19.5 14h2.5v7h-2.5z"/></svg>
+      </a>
+    </div>
+    <a class="btn btn-primary" href="#buy">BUY $AMC</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <div class="hero-banner">
+    <img src="banner.jpeg" alt="AMC Theater banner" />
+    <div class="spotlight spotlight-1"></div>
+    <div class="spotlight spotlight-2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="now-showing-tag">★ NOW SHOWING ★</div>
+    <h1 class="hero-title">
+      <span class="title-line-1">AMURICAN</span>
+      <span class="title-line-2">MEGA CENDORR</span>
+      <span class="title-line-3">RRRRRRR</span>
+    </h1>
+    <p class="hero-tagline">Despite the stonk being up <b>100%</b> over the course of the last week, short interest remains <b>low</b> for $AMC.</p>
+    <p class="hero-shout">MOVIEZ GO HIYOR!!!</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary big" href="#buy">🎬 BUY TICKETS ($AMC)</a>
+      <a class="btn btn-ghost big" href="#lore">📜 READ THE LORE</a>
+    </div>
+    <div class="ca-pill" id="contractPill" title="Click to copy contract">
+      <span class="ca-label">CA:</span>
+      <span class="ca-addr" id="contractAddr">TBA</span>
+      <span class="ca-copy" id="copyBtn">📋 COPY</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE BAR -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="bulbs"></div>
+  <div class="marquee-text">🎬 $AMC • MOVIEZ GO HIYOR • 100% UP • SHORT INTEREST LOW • APES TOGETHER STRONG • DIAMOND HANDS • $AMC • MOVIEZ GO HIYOR • 100% UP • SHORT INTEREST LOW • APES TOGETHER STRONG • DIAMOND HANDS</div>
+  <div class="bulbs"></div>
+</div>
+
+<!-- CA SECTION -->
+<section id="ca" class="section ca-section">
+  <div class="ca-frame">
+    <div class="bulbs top"></div>
+    <div class="ca-inner">
+      <span class="ca-tag">CONTRACT ADDRESS</span>
+      <div class="ca-display" id="contractDisplay" title="Click to copy">
+        <span class="ca-display-addr" id="contractAddrBig">TBA</span>
+        <button class="ca-display-btn" id="copyBtnBig" type="button">📋 COPY</button>
+      </div>
+      <p class="ca-note">CA will be revealed at launch. Don't trust any contract until announced on our official X / Telegram. <b>Stay sharp, ape.</b></p>
+    </div>
+    <div class="bulbs bottom"></div>
+  </div>
+</section>
+
+<!-- LORE -->
+<section id="lore" class="section lore">
+  <div class="section-header">
+    <span class="reel">🎞️</span>
+    <h2>THE LORE</h2>
+    <span class="reel">🎞️</span>
+  </div>
+  <div class="lore-grid">
+    <div class="lore-card">
+      <img src="photo_2026-04-26 18.20.03.jpeg" alt="CEO Aron at the AMC theater" />
+      <div class="lore-card-body">
+        <h3>Chapter I — The CEO Awakens</h3>
+        <p>In a faraway theater up in the hills, an old man wif a pipe smoked cigars and proclaimed unto the apes: <em>"WE MAKE MOVIEZ BETTER. YOU MAKE THEM GREATER."</em></p>
+        <p>The marquee flickered. The popcorn was buttery. The retail army assembled.</p>
+      </div>
+    </div>
+
+    <div class="lore-card flip">
+      <img src="photo_2026-04-26 18.19.38.jpeg" alt="UFO over AMC theater" />
+      <div class="lore-card-body">
+        <h3>Chapter II — The UFO Over IMAX</h3>
+        <p>A UFO hovered over the AMC IMAX. The Cendorr stared up. Tickets were sold. Drinks were drunk. Picketn was picketn.</p>
+        <p>Now Showing: <b>PLANETS OF THE APES (SEMI RETARDED APES)</b>.</p>
+      </div>
+    </div>
+
+    <div class="lore-card">
+      <img src="photo_2026-04-26 18.19.31.jpeg" alt="FRENDS4LIFE high five" />
+      <div class="lore-card-body">
+        <h3>Chapter III — FRENDS4LIFE</h3>
+        <p>The Cendorr met the Communist Agent at the Frends4Life ceremony. They high-fived. The crowd clapped. A small golden trophy was awarded.</p>
+        <p>From that day, no short seller was ever safe again.</p>
+      </div>
+    </div>
+
+    <div class="lore-card flip">
+      <img src="photo_2026-04-26 18.19.48.jpeg" alt="Cendorr with stacks of cash and green chart" />
+      <div class="lore-card-body">
+        <h3>Chapter IV — The 100% Week</h3>
+        <p>The stonk went up 100% in a week. Short interest stayed weirdly low. Nobody could explain it. The Cendorr just smiled.</p>
+        <p class="big-quote">"MOVIEZ GO HIYOR!!!"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENOMICS / NOW SHOWING -->
+<section id="tokenomics" class="section tokenomics">
+  <div class="marquee-frame">
+    <div class="bulbs top"></div>
+    <h2 class="marquee-title">★ NOW SHOWING: TOKENOMICS ★</h2>
+    <div class="bulbs bottom"></div>
+  </div>
+  <div class="ticket-grid">
+    <div class="ticket">
+      <div class="ticket-stub">
+        <span class="stub-label">ADMIT ONE</span>
+        <span class="stub-num">001</span>
+      </div>
+      <div class="ticket-body">
+        <h3>Total Supply</h3>
+        <p class="big-num">1,000,000,000</p>
+        <p>One billion $AMC. One for every ape. None for the shorts.</p>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-stub">
+        <span class="stub-label">ADMIT ONE</span>
+        <span class="stub-num">002</span>
+      </div>
+      <div class="ticket-body">
+        <h3>Tax</h3>
+        <p class="big-num">0 / 0</p>
+        <p>No buy tax. No sell tax. No theater fees. Only popcorn and gains.</p>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-stub">
+        <span class="stub-label">ADMIT ONE</span>
+        <span class="stub-num">003</span>
+      </div>
+      <div class="ticket-body">
+        <h3>Liquidity</h3>
+        <p class="big-num">LOCKED 🔒</p>
+        <p>LP burned harder than the popcorn left in the microwave too long.</p>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-stub">
+        <span class="stub-label">ADMIT ONE</span>
+        <span class="stub-num">004</span>
+      </div>
+      <div class="ticket-body">
+        <h3>Contract</h3>
+        <p class="big-num">RENOUNCED</p>
+        <p>Contract is renounced. The Cendorr has no keys. The Cendorr only has hands. Diamond ones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section id="buy" class="section how-to-buy">
+  <div class="section-header">
+    <span class="reel">🍿</span>
+    <h2>HOW 2 BUY $AMC</h2>
+    <span class="reel">🍿</span>
+  </div>
+  <p class="section-sub">Four steps. Even your uncle who still trades on Robinhood can do it.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Get a Wallet</h3>
+      <p>Download Phantom (Solana) or MetaMask (ETH/Base). Don't tell yor wife.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Fund the Bag</h3>
+      <p>Send some SOL/ETH to yor wallet from yor favorite exchange. The Cendorr accepts all currencies.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Swap for $AMC</h3>
+      <p>Go to Raydium / Uniswap. Paste the contract. Hit swap. Don't refresh. Don't panic.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Diamond Hand</h3>
+      <p>Sit in yor recliner. Eat popcorn. Watch MOVIEZ GO HIYOR.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section gallery">
+  <div class="section-header">
+    <span class="reel">🎬</span>
+    <h2>THE CENDORR CINEMATIC UNIVERSE</h2>
+    <span class="reel">🎬</span>
+  </div>
+  <div class="poster-grid">
+    <figure class="poster">
+      <img src="photo_2026-04-26 18.19.42.jpeg" alt="Cendorr in his penthouse" />
+      <figcaption>KING OF KINGS</figcaption>
+    </figure>
+    <figure class="poster">
+      <img src="photo_2026-04-26 18.19.44.jpeg" alt="Cendorr at the casino high roller lounge" />
+      <figcaption>HIGH ROLLER</figcaption>
+    </figure>
+    <figure class="poster">
+      <img src="photo_2026-04-26 18.12.43.jpeg" alt="Cendorr with the communist agent" />
+      <figcaption>FRENDS 4 LIFE</figcaption>
+    </figure>
+    <figure class="poster">
+      <img src="photo_2026-04-26 18.19.57.jpeg" alt="CEO Aron the wizard" />
+      <figcaption>WIZARD AT THE BOX OFFICE</figcaption>
+    </figure>
+    <figure class="poster">
+      <img src="photo_2026-04-26 18.19.38.jpeg" alt="UFO at the AMC theater" />
+      <figcaption>UFO OVER IMAX</figcaption>
+    </figure>
+    <figure class="poster">
+      <img src="photo_2026-04-26 18.19.48.jpeg" alt="Cendorr stack of cash" />
+      <figcaption>+100% IN A WEEK</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ROADMAP / COMING ATTRACTIONS -->
+<section id="roadmap" class="section roadmap">
+  <div class="marquee-frame">
+    <div class="bulbs top"></div>
+    <h2 class="marquee-title">★ COMING ATTRACTIONS ★</h2>
+    <div class="bulbs bottom"></div>
+  </div>
+  <div class="phases">
+    <div class="phase">
+      <span class="phase-tag">PHASE 1</span>
+      <h3>OPENING NIGHT</h3>
+      <ul>
+        <li>✔ Launch the Cendorr</li>
+        <li>✔ Burn the LP</li>
+        <li>✔ Renounce contract</li>
+        <li>✔ Telegram &amp; X go live</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <span class="phase-tag">PHASE 2</span>
+      <h3>FEATURE PRESENTATION</h3>
+      <ul>
+        <li>★ DEX Screener trending</li>
+        <li>★ CMC + CoinGecko listings</li>
+        <li>★ Memez competition (1B prize)</li>
+        <li>★ First CEX listing</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <span class="phase-tag">PHASE 3</span>
+      <h3>SEQUEL: THE SQUEEZE</h3>
+      <ul>
+        <li>☆ Tier 1 CEX listings</li>
+        <li>☆ Cendorr cinematic universe NFTs</li>
+        <li>☆ AMC theaters partnership (real)</li>
+        <li>☆ MOVIEZ GO HIYOR (forever)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <img class="cta-cendorr" src="photo_2026-04-26 18.19.48.jpeg" alt="Cendorr with cash" />
+  <div class="cta-content">
+    <h2>STILL HERE?</h2>
+    <p>The stonk just went up another 100%. Short interest is still low. The Cendorr is waiting.</p>
+    <a class="btn btn-primary big" href="#buy">🎬 BUY $AMC NOW</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <img class="footer-logo" src="logo.jpeg" alt="$AMC logo" />
+    <div class="footer-text">
+      <p class="footer-title">AMURICAN MEGA CENDORR — $AMC</p>
+      <p>MOVIEZ GO HIYOR!!! &nbsp;•&nbsp; Apes Together Strong &nbsp;•&nbsp; Diamond Hands Forever</p>
+      <p class="disclaimer">$AMC is a memecoin. It has no intrinsic value or expectation of financial return. There is no formal team or roadmap. Buy popcorn responsibly. Not affiliated with AMC Entertainment Holdings, Inc.</p>
+    </div>
+    <div class="footer-socials">
+      <a href="#" aria-label="Twitter / X">𝕏</a>
+      <a href="#" aria-label="Telegram">✈</a>
+      <a href="#" aria-label="DexScreener">📈</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
