@@ -105,6 +105,104 @@
   </div>
 </section>
 
+<!-- VAULT & FURNACE: locked + burned live scoreboard -->
+<section id="vault" class="vault" aria-label="Locked and Burned supply scoreboard">
+  <div class="vault-frame">
+    <div class="bulbs top"></div>
+
+    <div class="vault-header">
+      <h2 class="vault-title">★ THE VAULT &amp; THE FURNACE ★</h2>
+      <div class="vault-live" id="vaultLive" title="Live price from DexScreener">
+        <span class="live-bulb" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="14" height="14">
+            <ellipse cx="16" cy="13" rx="9" ry="9.5" fill="#F5C518" stroke="#C99A0A" stroke-width="2"/>
+            <rect x="11" y="22" width="10" height="3" rx="1" fill="#666"/>
+            <rect x="12" y="25" width="8" height="3" fill="#444"/>
+            <ellipse cx="13" cy="10" rx="2.5" ry="1.6" fill="rgba(255,255,255,.6)"/>
+          </svg>
+        </span>
+        LIVE
+      </div>
+    </div>
+
+    <div class="vault-grid">
+      <!-- LOCKED -->
+      <div class="vault-tile tile-locked">
+        <div class="tile-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 72" class="icon-lock">
+            <path class="lock-shackle" d="M22 32 V22 a10 10 0 0 1 20 0 V32" fill="none" stroke="#F5C518" stroke-width="6" stroke-linecap="round"/>
+            <rect x="10" y="30" width="44" height="36" rx="4" fill="#F5C518" stroke="#C99A0A" stroke-width="2"/>
+            <circle cx="15" cy="35" r="1.8" fill="#1a1208"/>
+            <circle cx="49" cy="35" r="1.8" fill="#1a1208"/>
+            <circle cx="15" cy="61" r="1.8" fill="#1a1208"/>
+            <circle cx="49" cy="61" r="1.8" fill="#1a1208"/>
+            <circle cx="32" cy="44" r="4.5" fill="#1a1208"/>
+            <rect x="30" y="46" width="4" height="11" rx="1" fill="#1a1208"/>
+            <rect x="13" y="33" width="3" height="30" rx="1" fill="rgba(255,255,255,.32)"/>
+          </svg>
+        </div>
+        <div class="tile-body">
+          <div class="tile-label">LOCKED IN VAULT</div>
+          <div class="tile-pct"><span class="tile-num" data-target="2.5" data-decimals="1">0.0</span><span class="tile-suf">%</span></div>
+          <div class="tile-amount"><span class="tile-num" data-target="25000000">0</span> $AMC</div>
+          <div class="tile-usd">≈ <span class="usd-locked">—</span></div>
+        </div>
+      </div>
+
+      <!-- BURNED -->
+      <div class="vault-tile tile-burned">
+        <div class="tile-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 72" class="icon-flame">
+            <path class="flame flame-outer" d="M32 6 C 40 18, 52 24, 52 40 C 52 56, 42 68, 32 68 C 22 68, 12 56, 12 42 C 12 32, 20 30, 22 36 C 24 24, 28 16, 32 6 Z" fill="#E2231A"/>
+            <path class="flame flame-mid" d="M32 18 C 38 28, 46 32, 46 44 C 46 56, 38 64, 32 64 C 26 64, 18 56, 18 46 C 18 38, 24 36, 26 40 C 28 30, 30 26, 32 18 Z" fill="#F5C518"/>
+            <path class="flame flame-inner" d="M32 32 C 35 38, 40 42, 40 50 C 40 58, 35 62, 32 62 C 29 62, 24 58, 24 52 C 24 46, 28 46, 29 48 C 30 42, 31 38, 32 32 Z" fill="#FFE9B0"/>
+          </svg>
+        </div>
+        <div class="tile-body">
+          <div class="tile-label">BURNED FOREVER</div>
+          <div class="tile-pct"><span class="tile-num" data-target="8.5" data-decimals="1">0.0</span><span class="tile-suf">%</span></div>
+          <div class="tile-amount"><span class="tile-num" data-target="85000000">0</span> $AMC</div>
+          <div class="tile-usd">≈ <span class="usd-burned">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILM STRIP BAR -->
+    <div class="filmstrip" aria-hidden="true">
+      <div class="filmstrip-sprockets"></div>
+      <div class="filmstrip-track">
+        <div class="seg seg-locked"      style="--target:2.5%"></div>
+        <div class="seg seg-burned"      style="--target:8.5%"><span class="seg-label">8.5%</span></div>
+        <div class="seg seg-circulating" style="--target:89%"><span class="seg-label">89% CIRCULATING</span></div>
+      </div>
+      <div class="filmstrip-sprockets"></div>
+    </div>
+
+    <div class="filmstrip-legend">
+      <span class="legend-item"><span class="swatch sw-locked"></span><b>2.5%</b> LOCKED</span>
+      <span class="legend-item"><span class="swatch sw-burned"></span><b>8.5%</b> BURNED</span>
+      <span class="legend-item"><span class="swatch sw-circulating"></span><b>89%</b> CIRCULATING</span>
+    </div>
+
+    <div class="vault-totals">
+      <div class="total-item">
+        <span class="total-label">TOTAL SUPPLY</span>
+        <span class="total-value">1,000,000,000 $AMC</span>
+      </div>
+      <div class="total-item">
+        <span class="total-label">PRICE</span>
+        <span class="total-value usd-price">—</span>
+      </div>
+      <div class="total-item">
+        <span class="total-label">MARKET CAP</span>
+        <span class="total-value usd-mcap">—</span>
+      </div>
+    </div>
+
+    <div class="bulbs bottom"></div>
+  </div>
+</section>
+
 <!-- MARQUEE BAR -->
 <div class="marquee-bar" aria-hidden="true">
   <div class="bulbs"></div>
