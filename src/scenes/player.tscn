@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://src/entities/Player3D.gd" id="1_player"]
+[ext_resource type="Script" path="res://src/entities/BillboardSprite.gd" id="2_billboard"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(0.8, 1.6, 0.8)
+
+[sub_resource type="Gradient" id="Gradient_standee"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.15, 0.3, 0.75)
+colors = PackedColorArray(0.35, 0.2, 0.1, 1, 0.9, 0.72, 0.55, 1, 0.2, 0.35, 0.65, 1, 0.25, 0.18, 0.12, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_standee"]
+gradient = SubResource("Gradient_standee")
+width = 16
+height = 32
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("BoxShape3D_body")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+pixel_size = 0.05
+texture = SubResource("GradientTexture2D_standee")
+script = ExtResource("2_billboard")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 6, 7)
+current = true

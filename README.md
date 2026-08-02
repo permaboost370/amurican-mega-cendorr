@@ -27,7 +27,13 @@ HTML5 (WebGL2 / Compatibility renderer) browser build.
 - **`src/entities/BillboardSprite.gd`** — strict cylindrical (Y-axis only)
   billboarding so standee sprites never lean back under a pitched camera.
 
-## Next up
+## Roadmap
 
-- Tilt-shift post-processing shader (miniature diorama look)
-- Test scene wiring the player, camera, and environment together
+See [PLAN.md](PLAN.md) for the full phased implementation plan. Currently at
+the end of Phase 1: a runnable diorama test scene (`src/scenes/world.tscn`,
+set as main scene) with grid movement, billboard standee, hard shadows, and
+the tilt-shift post-processing shader.
+
+## Running
+
+Open the project in Godot 4.3+ and press F5. Move with arrow keys or WASD.
