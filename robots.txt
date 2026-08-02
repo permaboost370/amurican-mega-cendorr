@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://amurican-mega-cendorr.vercel.app/sitemap.xml
