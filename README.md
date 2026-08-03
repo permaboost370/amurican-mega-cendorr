@@ -1,9 +1,11 @@
-# Tessera — HD-2D Persistent Multiplayer City-Builder
+# Kek Battles — Rise of the Kekistan Republic
 
-A Travian-class persistent multiplayer strategy game where every player's
-city is a living Octopath Traveler-style HD-2D diorama: pixel-art billboard
-citizens inside a low-poly 3D miniature world, running in the browser
-(Godot 4.x → WebGL2) on top of an authoritative Node.js/PostgreSQL backend.
+An HD-2D persistent multiplayer city-builder: rebuild the scattered Republic
+of Kekistan tile by tile while the Normie Legion drains the color from the
+world. Every player's city is a living Octopath Traveler-style diorama:
+pixel-art billboard citizens inside a low-poly 3D miniature world, running in
+the browser (Godot 4.x → WebGL2) on top of an authoritative
+Node.js/PostgreSQL backend.
 
 **The master plan — full game design, art pipeline, architecture, and
 production model — lives in [GAME_PLAN.md](GAME_PLAN.md).**
