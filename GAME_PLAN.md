@@ -169,7 +169,7 @@ personal.
 | 2 | Green Candles | Exchange fee 10%→5%, +1 active offer |
 | 2 | Frog Husbandry | unlocks Frog Pens / Frog Riders |
 | 2 | Diamond Hands | Stash protection +50% |
-| 3 | Banhammer Smithing | unlocks Banhammer Works / Ban Rams |
+| 3 | Banhammer Smithing | unlocks Banhammer Works / Ban Hammers |
 | 3 | Frog Scouts | scout reports show exact garrison |
 | 3 | Logistics | +1 training queue slot |
 | 4 | Meme Divination | +25% Meme Magic from Normie compounds |
@@ -438,7 +438,7 @@ the project's ability to be listed, partnered, and monetized:
    not coded commentary.
 4. **No copyrighted anthem.** "Shadilay!" the *word* is our greeting; the 1986
    P.E.P.E. song is copyrighted music we do not sample. Our anthem is an
-   **original Italo-disco homage** (§19).
+   **original Italo-disco homage** (§20).
 
 ### 19. Asset Manifest (launch)
 
