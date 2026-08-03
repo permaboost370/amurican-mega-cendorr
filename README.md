@@ -1,8 +1,12 @@
-# HD-2D RPG Prototype
+# Tessera — HD-2D Persistent Multiplayer City-Builder
 
-An Octopath Traveler-style HD-2D RPG built in Godot 4.x: 2D pixel-art
-billboard sprites inside a low-poly 3D environment, targeting an optimized
-HTML5 (WebGL2 / Compatibility renderer) browser build.
+A Travian-class persistent multiplayer strategy game where every player's
+city is a living Octopath Traveler-style HD-2D diorama: pixel-art billboard
+citizens inside a low-poly 3D miniature world, running in the browser
+(Godot 4.x → WebGL2) on top of an authoritative Node.js/PostgreSQL backend.
+
+**The master plan — full game design, art pipeline, architecture, and
+production model — lives in [GAME_PLAN.md](GAME_PLAN.md).**
 
 ## Structure
 
@@ -27,12 +31,12 @@ HTML5 (WebGL2 / Compatibility renderer) browser build.
 - **`src/entities/BillboardSprite.gd`** — strict cylindrical (Y-axis only)
   billboarding so standee sprites never lean back under a pitched camera.
 
-## Roadmap
+## Status
 
-See [PLAN.md](PLAN.md) for the full phased implementation plan. Currently at
-the end of Phase 1: a runnable diorama test scene (`src/scenes/world.tscn`,
-set as main scene) with grid movement, billboard standee, hard shadows, and
-the tilt-shift post-processing shader.
+Milestone M0 (rendering foundation) is complete: a runnable diorama test
+scene (`src/scenes/world.tscn`, set as main scene) with grid movement,
+billboard standee, hard shadows, and the tilt-shift post-processing shader.
+Next: M1 (city diorama client) per [GAME_PLAN.md](GAME_PLAN.md).
 
 ## Running
 
