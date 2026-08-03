@@ -1,175 +1,166 @@
-# Implementation Plan — HD-2D RPG Prototype
+# Implementation Plan — HD-2D Persistent Strategy Game
 
-**Engine:** Godot 4.3+ · **Target:** HTML5 (WebGL2, Compatibility renderer)
-**Aesthetic:** Octopath Traveler — 2D pixel-art standees in a low-poly 3D diorama
-**Mechanics:** Octopath-style turn-based combat (Break & Boost), towns, dungeons, party progression
+**Genre:** Travian/Ikariam-style persistent multiplayer city-builder
+**Presentation:** Octopath Traveler HD-2D — your city is a living miniature
+diorama (billboard pixel-art citizens, low-poly buildings, tilt-shift, hard
+retro shadows)
+**Client:** Godot 4.3+ → HTML5 (WebGL2, Compatibility renderer)
+**Server:** Authoritative backend (Node.js/TypeScript + PostgreSQL), JSON over
+HTTPS/WSS — all game logic server-side, the client only renders and requests
+**Crypto:** off-chain game economy on the server, on-chain hooks (wallet
+login, ownable assets) integrated at a dedicated phase — never load-bearing
+for core gameplay
 
 This is the single source of truth for build order. Each phase ends with a
-committed, runnable state and explicit acceptance criteria. We do not start a
-phase until the previous one meets its criteria.
+committed, runnable state and explicit acceptance criteria.
 
 ---
 
 ## Design Pillars
 
-1. **Diorama presentation** — billboarded pixel sprites, tilt-shift blur,
-   hard retro shadows, pitched-down camera. The world should read as a
-   miniature toy set.
-2. **Break & Boost combat** — the Octopath core loop: probe enemy weaknesses,
-   shave shield points, break enemies to stun them, spend banked Boost Points
-   for burst turns.
-3. **Browser-first performance** — every system is built knowing it ships as
-   a WebGL2 export. No feature lands if it can't run smoothly in a browser.
+1. **A city you want to look at** — competitors (Travian, Ikariam) render
+   cities as static illustrations. Ours is an explorable HD-2D diorama with
+   wandering citizens, day/night light, and buildings that visibly grow with
+   upgrades. Presentation is the moat.
+2. **Server-authoritative everything** — resources, timers, battles, trades
+   are computed on the backend. The browser client can be inspected, modified,
+   or scripted by players and it must not matter.
+3. **Async by design** — no real-time netcode. Tick-based economy (computed
+   lazily from timestamps, not per-second cron), build queues measured in
+   minutes/hours, raids that resolve while you sleep. Cheap to run, browser-native.
+4. **Battles you can watch** — combat resolves as server math, but replays
+   render as animated HD-2D standee battles in the client. Nobody in the
+   genre has this.
 
-## Asset Pipeline
+## Core Loop (v1 target)
 
-| Asset type | Source | Format | Destination |
-|---|---|---|---|
-| Character/NPC sprite sheets | Retrodiffusion / Pixellab | PNG (nearest-filtered) | `assets/sprites/` |
-| Environment meshes | Meshy.ai | glTF (.glb preferred over .fbx) | `assets/models/` |
-| UI textures | Pixellab / hand-made | PNG | `assets/sprites/` |
-| Audio | TBD (e.g. jsfxr, purchased packs) | OGG (web-safe) | `assets/audio/` |
+Produce resources → upgrade buildings → train troops → raid/trade → climb
+rankings, cooperate via alliances. One shared persistent world.
 
-Placeholder procedural resources (gradient standees, box meshes) are used
-until real assets land; every placeholder is swappable without code changes.
+## Architecture Overview
+
+```
+[Godot Web Client]  ── HTTPS/WSS JSON ──  [API Server (Node/TS)]
+  city diorama view                          auth, validation
+  world map view                             game rules engine
+  UI / menus                                 lazy tick resolution
+  battle replay player                     [PostgreSQL]
+  (later: JS wallet bridge)                  cities, armies, market, events
+```
+
+- **Lazy ticks:** state stores `amount_at_timestamp` + rates; current values
+  are derived on read. No per-player timers on the server.
+- **Client repo layout:** current Godot project stays at repo root; backend
+  lives in `server/` (same repo until scale demands otherwise).
+- Reused from the RPG groundwork: renderer config, `BillboardSprite.gd`,
+  tilt-shift shader, asset pipeline. `Player3D.gd` grid logic gets repurposed
+  for an optional walkable "mayor" avatar in your own city.
 
 ---
 
-## Phase 0 — Foundation ✅ DONE
+## Phase 0 — Rendering Foundation ✅ DONE
+Compatibility renderer, nearest filtering, hard shadows, billboard system,
+grid movement, input map.
 
-- Project config: Compatibility renderer, nearest filtering, hard 1024px shadows,
-  arrow + WASD input map.
-- `Player3D.gd`: grid movement (2.0-unit cells, 0.25 s linear tween), input
-  buffering, pre-step collision sweep via `test_move()`.
-- `BillboardSprite.gd`: strict Y-axis cylindrical billboarding.
+## Phase 1 — Diorama Visual Proof ✅ DONE
+Tilt-shift shader, walkable test diorama (`src/scenes/world.tscn`).
 
-## Phase 1 — Visual Proof (Diorama Test Scene)
+## Phase 2 — Game Design One-Pager (with user)
 
-**Goal:** walk a standee around a lit 3D diorama with tilt-shift, in-browser look achieved.
+- [ ] Theme/setting & working title (fantasy? antiquity? matches HD-2D warmth)
+- [ ] Resource types (3–4), building list (~10 for v1), unit list (~4 for v1)
+- [ ] Economy numbers v0: production rates, costs, build times, storage caps
+- [ ] Combat rules v0: army composition, travel time, resolution formula, loot
+- [ ] Crypto/tokenomics hooks: what is on-chain (land? premium currency?
+      cosmetics?) — decided with the project's token design, not assumed
+- [ ] Data schema draft: City, Building, Unit, Army, Player, BattleReport
 
-- [ ] `src/shaders/tilt_shift.gdshader` — Godot 4 syntax (`hint_screen_texture`),
-      12-tap poisson blur scaling toward top/bottom of screen, crisp center band,
-      tunable uniforms (focus center, band height, falloff, max radius).
-- [ ] `src/scenes/player.tscn` — CharacterBody3D + box collider + billboard
-      Sprite3D (procedural placeholder standee) + pitched follow camera.
-- [ ] `src/scenes/world.tscn` — ground plane, obstacle blocks on grid cells,
-      directional sun with hard shadows, sky environment, full-screen tilt-shift
-      ColorRect on a CanvasLayer. Set as main scene.
+**Accept when:** the one-pager is agreed and numbers live in data files
+(JSON/Resource), not code.
 
-**Accept when:** F5 runs; player steps cell-to-cell, blocks stop movement, sprite
-never tilts, top/bottom of screen visibly blurred, center crisp.
+## Phase 3 — City Diorama Client (mock data)
 
-## Phase 2 — Core Architecture (Autoloads & Interaction)
+- [ ] City scene: plot grid on the diorama, cursor/tap plot selection
+- [ ] Building placement & visual upgrade states (placeholder meshes/sprites
+      per level tier), construction-in-progress visuals
+- [ ] Ambient life: billboard citizens wandering between buildings
+- [ ] City HUD: resource bars, build menu, upgrade timers
+- [ ] All driven by a local mock `CityState` — server-shaped JSON from day one
 
-**Goal:** the skeleton every later system plugs into.
+**Accept when:** you can "play" a fake city fully client-side: place, upgrade,
+watch timers, and it looks like the diorama we fell in love with.
 
-- [ ] `src/autoload/GlobalSignal.gd` — signal bus (interaction, dialogue,
-      battle start/end, scene change requests).
-- [ ] `src/autoload/GameState.gd` — party roster, inventory, flags, gold;
-      serializable to Dictionary from day one (save-ready).
-- [ ] `src/autoload/SceneManager.gd` — scene transitions with fade in/out,
-      spawn-point targeting.
-- [ ] Interaction system: `Interactable` base (Area3D), player raycasts the cell
-      it faces, `ui_accept` triggers. First interactables: sign, chest.
-- [ ] Dialogue UI: bottom text box, typewriter reveal, multi-page, portrait slot.
+## Phase 4 — Backend MVP
 
-**Accept when:** player reads a sign, opens a chest (item enters GameState),
-and transitions between two maps through a door with a fade.
+- [ ] Node/TS server: accounts (email/guest), sessions, Postgres schema
+- [ ] City state endpoints: fetch (with lazy tick resolution), start build,
+      upgrade, cancel; server-side validation of costs/prereqs/queues
+- [ ] Deterministic rules engine module (pure functions, unit-tested) shared
+      by all endpoints
+- [ ] Dev deployment (single small VM/container + managed Postgres)
 
-## Phase 3 — World Content (NPCs & Town)
+**Accept when:** two browser sessions see the same city evolve consistently;
+tampering with the client cannot mint resources.
 
-**Goal:** one town + one dungeon-entrance map that feel inhabited.
+## Phase 5 — Client ↔ Server Integration
 
-- [ ] `NPC3D.tscn` — billboard standee, optional grid wander, dialogue data
-      (Resource-based, not hardcoded strings).
-- [ ] Town map: shops-to-be, homes, NPCs with dialogue.
-- [ ] Dungeon exterior/interior maps wired via SceneManager.
-- [ ] First real art pass: swap placeholder standees for Retrodiffusion sheets
-      (idle + 4-direction walk), first Meshy.ai environment meshes.
+- [ ] Replace mock CityState with API calls; optimistic UI + server reconcile
+- [ ] Login flow in-client; reconnect/resume handling
+- [ ] Error/latency UX (queued actions, retry, offline notice)
 
-**Accept when:** walking the town, talking to 3+ NPCs, and entering the dungeon
-all work with real(ish) art.
+**Accept when:** the Phase 3 experience works end-to-end against the real
+server from two different machines.
 
-## Phase 4 — Battle Core (Break & Boost)
+## Phase 6 — Shared World Map
 
-**Goal:** the Octopath combat loop, functional with debug UI.
+- [ ] World map scene (HD-2D board-game look: low-poly terrain, standee
+      markers for cities)
+- [ ] Map API: regions, city placement for new players, neighbor visibility
+- [ ] Travel time model (distance → minutes) for future raids/trade
 
-Combat rules (locked now so systems agree):
+**Accept when:** every registered player's city exists on one shared map both
+can browse.
 
-- **Turn order:** speed-sorted initiative, recalculated each round; current and
-  next-round order displayed on a bar.
-- **Shields & weaknesses:** every enemy has shield points and a weakness set
-  (weapon types + elements). A hit matching a weakness removes 1 shield point
-  (+1 per Boost level). At 0 → **Break**: enemy loses its next turn, takes
-  ×2 damage until the end of that turn, then shields reset.
-- **Boost:** each battler gains 1 BP at the start of their turn (max 5) unless
-  they spent BP on their previous turn. Spend up to 3 BP on an action: extra
-  weapon hits or amplified skill power.
-- Battlers, skills, and enemies are data-driven `Resource`s (`BattlerStats`,
-  `SkillData`, `EnemyData`) so content is added without touching logic.
+## Phase 7 — Combat & Battle Replays
 
-- [ ] `BattleManager` state machine (round start → turn → resolve → win/lose).
-- [ ] Damage formula with variance, weakness/break multipliers, boost scaling.
-- [ ] Minimal battle scene: side-view diorama stage, party standees vs enemy
-      standees, debug command list (Attack / Skill / Boost / Defend / Flee).
+- [ ] Barracks/training queues, army management UI
+- [ ] Raid flow: send army → travel timer → server-side resolution → loot →
+      return timer; battle reports persisted
+- [ ] HD-2D battle replay: render the server's battle log as an animated
+      standee skirmish (reuse of the RPG battle-scene concept)
+- [ ] Defense: walls, garrison, offline protection rules for new players
 
-**Accept when:** a scripted 2v2 battle is winnable/losable purely through the
-Break & Boost rules above.
+**Accept when:** player A raids player B, both get reports, and the replay is
+watchable and matches the numbers.
 
-## Phase 5 — Battle Presentation & AI
+## Phase 8 — Economy & Social
 
-- [ ] Real battle UI: command menu, target picker, shield/weakness readout
-      (hidden until discovered, Octopath-style "???" reveal), turn-order bar,
-      BP pips, damage popups.
-- [ ] Enemy AI: weighted action selection, weakness-probing patterns, boss flags.
-- [ ] Attack/hit/break animations (sprite frame swaps + tweens), screen shake,
-      break flash.
+- [ ] Player-to-player market (buy/sell resource offers, escrowed server-side)
+- [ ] Alliances: create/join, member list, shared chat (WSS)
+- [ ] Rankings/leaderboards
 
-**Accept when:** a battle is fully playable without reading debug output.
+## Phase 9 — Crypto Integration
 
-## Phase 6 — Progression Systems
+- [ ] Wallet connect + signature login via Godot's JavaScriptBridge
+- [ ] On-chain assets per Phase 2 tokenomics decisions (e.g. land deeds or
+      premium currency), with server as source of truth for gameplay and
+      chain as source of truth for ownership
+- [ ] Compliance sanity pass (jurisdictions, custody, ToS) before launch
 
-- [ ] XP/levels, stat growth curves.
-- [ ] Jobs: 4 starter jobs (e.g. Warrior, Cleric, Scholar, Thief), job skills
-      bought with JP, one passive each.
-- [ ] Inventory & equipment (weapon type ties into weakness system), consumables.
-- [ ] Shops (buy/sell) and inn (heal) in town.
+## Phase 10 — Launch Ops & Polish
 
-**Accept when:** a character can level, learn a skill, equip a new weapon, and
-that weapon's type matters against enemy weaknesses.
-
-## Phase 7 — Encounters & Dungeon Loop
-
-- [ ] Step-based random encounters on grid movement (zone-configured rates and
-      enemy tables), battle transition swirl.
-- [ ] One full dungeon: 3+ maps, chests, a miniboss, a boss.
-- [ ] Game over → title flow; victory rewards (XP/JP/gold/items).
-
-**Accept when:** town → dungeon → boss → back to town is a complete, balanced
-15-minute play loop.
-
-## Phase 8 — Persistence & Audio
-
-- [ ] Save/load (GameState → JSON, browser `user://` storage — test IndexedDB
-      persistence in the actual web export early).
-- [ ] Music per scene (town/dungeon/battle) with crossfade; SFX for UI, steps,
-      combat hits, breaks.
-
-## Phase 9 — Web Export & Polish
-
-- [ ] HTML5 export preset; verify Compatibility rendering, texture compression,
-      total download size budget (< ~50 MB initial target).
-- [ ] Loading screen, itch.io (or static host) deployment, mobile-browser sanity
-      check.
-- [ ] Performance pass: draw calls, shadow distance, tilt-shift tap count.
+- [ ] Rate limiting, anti-abuse (multi-account farming is the genre's plague)
+- [ ] Web export size/perf budget, loading screen, mobile-browser pass
+- [ ] Monitoring, backups, world-reset/season tooling
 
 ---
 
 ## Working Agreements
 
-- Every phase = at least one commit with a runnable project.
-- Static typing everywhere; no placeholder-comment stubs.
-- Content lives in `Resource` files, logic in scripts — swapping placeholder
-  art or data never requires code edits.
-- Anything that might behave differently in WebGL2 (shaders, storage, audio)
-  gets verified in an actual web export during its phase, not at the end.
+- Every phase = at least one commit with a runnable state (client and/or server).
+- The server is the only authority; the client never computes an outcome.
+- All balance numbers live in data files; designers (us) tune without code edits.
+- Anything WebGL2/browser-sensitive is verified in a real web export during
+  its phase, not at the end.
+- Crypto features never gate core gameplay; the game must be fun with the
+  chain switched off.
