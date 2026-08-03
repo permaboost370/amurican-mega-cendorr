@@ -127,7 +127,7 @@ Long arcs: weekly (research, alliance ops), seasonal (Beacon race, 16 weeks).
   (resource-for-resource offers). Keeps the economy legible and keeps
   speculative pressure off the game loop.
 
-### 6. Buildings (14 at launch)
+### 6. Buildings (15 at launch)
 
 All buildings: `cost(level) = base_cost × 1.28^(level−1)`,
 `build_time(level) = base_time × 1.25^(level−1) × (1 − 0.02 × Capitol_level)`.
@@ -150,6 +150,7 @@ Max level 20 (Capitol 25). Each building has **3 visual tiers** (levels 1–7,
 | 12 | **Wall** | +3% defense/level; must be breached by Ban Hammers | 40/120/30/0 | 6 m |
 | 13 | **Watchtower** | earlier incoming-attack warning (+4 min/level) | 60/80/40/0 | 6 m |
 | 14 | **Architect's Guild** | second build queue (L1), −5% build cost (L10) | 200/200/150/10 | 25 m |
+| 15 | **Infirmary** | wounded defenders recover (§9): 25% base +1%/level, over 12 h | 90/70/110/0 | 10 m |
 
 City layout: fixed diorama plot grid (~24 plots on the 2.0-unit world grid we
 already built); players choose which plot each building occupies — cities look
@@ -220,6 +221,23 @@ loot        = min(Σ survivor.carry, 33% of each unprotected resource)
   numbers always match the report.
 - **Scouting:** Frog Rider scout missions; intercepted scouts reveal nothing.
 
+**Raiding & protection rules (the casual-vs-shark shock absorber):**
+
+- **Loot bands:** raiding a target below 50% of your power yields half loot;
+  below 25%, a quarter — *"no glory in bullying normie-tier settlements."*
+  Sharks hunt peers and compounds because farming minnows is economically dull.
+- **Raid fatigue:** each repeat raid on the same target within 24 h yields 40%
+  less loot, stacking — farming lists must rotate, pain spreads thin.
+- **Infirmary:** 25% (+1% per Infirmary level) of *defensive* casualties are
+  wounded instead of killed and recover over 12 h. Attacker losses are final —
+  attacking stays risky, defending is never a death spiral.
+- **No conquest of capitals (v1):** capitals can be looted and their walls
+  broken, never captured or razed. Outposts (§10) are the capturable layer.
+- **No offline shields (decided):** the playerbase is global — there is no
+  shared "night," and Brigades cover time zones. Offline safety comes from the
+  Stash, loot bands, fatigue, and the Infirmary, never from invulnerability
+  windows.
+
 ### 10. World Map & Movement
 
 - One shared world per Campaign: **200×200 tile board**, rendered as an HD-2D
@@ -235,6 +253,15 @@ loot        = min(Σ survivor.carry, 33% of each unprotected resource)
   depots holding confiscated Meme Magic, garrisoned by the Normie Legion
   (Clipboard Clerks, Gray Suits, HR Enforcers, Middle Managers as minibosses).
   PvE on-ramp, contested hotspots, Beacon fuel.
+- **Outposts (the mid-game expansion layer):** each Memelord may found up to
+  3 satellite outposts, unlocked at Capitol 10 / 15 / 20, on special tiles —
+  **Lumber Outpost** (forest), **Frog Hatchery** (marsh), **Meme Bore** (near
+  the Gray). Each has 1–3 building slots, its own small garrison, and a
+  production trickle back to the capital. Outposts are raidable and
+  **capturable** between players — territorial conflict with stakes smaller
+  than total war, and what Brigades skirmish over before the Beacon race.
+  (Schema: an outpost is a city of type `outpost`; full multi-city stays open
+  for later Campaigns.)
 - **Beacon Sites:** 9 fixed locations. Endgame objective (§12).
 
 ### 11. Trade, Alliances, Social
@@ -259,6 +286,19 @@ loot        = min(Σ survivor.carry, 33% of each unprotected resource)
 - Rewards: Hall of Dank engravings, cosmetic unlocks, **on-chain Topkek
   Medals** (soulbound), title cosmetics for the next Campaign. No
   gameplay-power carryover — every Campaign is a fair restart.
+- **Everyone wins the war:** the finale is the *Republic's* victory over the
+  Normie Legion. Every player carries a season-long **Liberation Score**
+  (compounds cleared, color-tiles held × days, defenses won, wagons escorted),
+  and when the Beacon fires, everyone's season rewards scale with it. The
+  closing screen reads *"The Republic prevailed — you liberated 214 tiles,"*
+  never "you lost." One Brigade gets the crown; the server gets the victory.
+- **Ladders below the crown:** personal medal tiers (bronze/silver/gold on
+  raids won, defenses held, liberation) engraved in the Hall of Dank, plus a
+  Brigade ladder (territory held, Beacon stages built — destroyed stages still
+  count) with cosmetic rewards reaching the top half of active Brigades.
+- **Free seasonal decree track:** weekly presidential decree chains with
+  cosmetic rewards give non-competitive players a structured arc through all
+  16 weeks. Free for everyone — never a paid pass.
 - Between Campaigns: 1-week intermission, world archive browsable.
 
 ### 13. New Player Experience
@@ -300,6 +340,23 @@ combat, or economic advantage; the game is fully playable with no wallet; the
 server is source of truth for gameplay, the chain for ownership. Integration
 via Godot `JavaScriptBridge` → host-page wallet libs (viem/wagmi pattern).
 Compliance review (jurisdictions, marketing language, ToS) is a launch gate.
+
+**Monetization policy (decided):**
+
+- Revenue = **Passport mints + seasonal cosmetic collections** (building
+  skins, standee outfits, replay victory FX, heraldry parts, city music
+  themes) in Kek / Topkek / Dankest tiers, purchased with the project token —
+  this is the token's utility sink. Artist-collab drops keep collections
+  fresh post-launch.
+- **No convenience purchases.** Extra queues, speed-ups, resource packs —
+  every one of them is power wearing a hat; none will ever exist.
+- **No play-to-earn.** Yield-emitting game loops mathematically require new
+  players to pay old players and death-spiral when growth stops. Kek Battles
+  creates *demand* for the token (cosmetics, identity, status); it never emits
+  yield. Medals are soulbound precisely so status cannot be bought secondhand.
+- Positioning to align with tokenomics owners before M9: this is a
+  **token-utility and community-growth play**, not an ARPU-maximizing F2P
+  game.
 
 ---
 
@@ -387,8 +444,8 @@ the project's ability to be listed, partnered, and monetized:
 
 | Category | Count | Tool |
 |---|---|---|
-| Building meshes (14 × 3 tiers) | 42 | Meshy |
-| Wall tiers, Beacon stages, Normie compound kit, terrain chunks, props | ~44 | Meshy |
+| Building meshes (15 × 3 tiers) | 45 | Meshy |
+| Wall tiers, Beacon stages, Normie compound kit, outpost kits (3 types), terrain chunks, props | ~50 | Meshy |
 | Kekistani citizen sprites (walk/idle, 4-dir) | 12 | Pixellab |
 | Troop sprites (map + replay sets, 6 units × 2) | 12 | Pixellab |
 | Normie Legion NPC sprites (4 troop types + 2 minibosses) | 6 | Pixellab |
@@ -556,8 +613,8 @@ the project's ability to be listed, partnered, and monetized:
 | M4 | World map & movement | shared map, spawns, travel, scouting, Normie compounds (PvE), the Gray rendering | two players find & scout each other; compound raid works |
 | M5 | Combat & replays | training, raids, resolution, reports, HD-2D replay player, walls/protection | A raids B; both reports correct; replay matches numbers |
 | M6 | Art production pass | 3 AI lanes connected, style anchors locked, manifest (§19) produced & integrated, audio in, guardrail checklists (§18) enforced in pipeline | placeholder-free city/map/replay; style coherent |
-| M7 | Economy & social | Exchange+wagons, Brigades+chat, rankings, decrees/tutorial, mail | full loop playable by a cohort of testers |
-| M8 | Campaigns & endgame | Campaign clock, Beacon race, the Gray recession wave, Hall of Dank, intermission/reset tooling | simulated Campaign completes cleanly |
+| M7 | Economy & social | Exchange+wagons, Brigades+chat, rankings, decrees/tutorial, mail, outpost founding & capture | full loop playable by a cohort of testers |
+| M8 | Campaigns & endgame | Campaign clock, Beacon race, the Gray recession wave, Liberation Score & rewards-for-all finale, seasonal decree track, Hall of Dank, intermission/reset tooling | simulated Campaign completes cleanly |
 | M9 | Crypto integration | wallet login, Passports/Medals/skins per §15, compliance pass | wallet user full journey; guardrails hold |
 | M10 | Beta → Launch | anti-abuse hardening, load test, monitoring, closed beta ≥100 players, balance patch, launch | stable beta metrics; go-live |
 
@@ -574,6 +631,7 @@ same execution model.
 | Pepe/flag IP & brand-safety incidents | §18 hard rules enforced by pipeline checklists + human review of every frog/flag asset |
 | AI art style drift | style anchors + palette snap + CI pipeline gate (§17) |
 | Multi-account farming | §14 heuristics from day one, not post-launch |
+| Casual churn from raiding pressure | loot bands + raid fatigue + Infirmary (§9); no-conquest capitals; everyone-wins finale (§12) |
 | Balance degeneracy | balance sims (§28) before every Campaign |
 | WebGL2 perf on mobile | per-milestone export checks; draw-call budget; LOD tiers |
 | Crypto regulatory exposure | §15 guardrails; compliance as a launch gate; game fun with chain off |
